@@ -1,0 +1,260 @@
+Ruby Assignment - Sept 13, 2012
+================================
+
+
+> first_string = "RUBY parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as RUBY code. The parser then executes all of the code it finds until it runs into a RUBY closing <br/> tag."
+> second_string = "RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used."
+
+
+1. 
+
+> first_string.scan('RUBY').count
+=> 3 
+
+-------------
+
+2. 
+
+> first_string_array = first_string.split " "
+> first+string_array.each_with_index.each do |v, i|
+>     if v=="RUBY"
+>     puts i
+>     end
+>   end
+0
+22
+39
+ => ["RUBY", "parses", "a", "file", "by", "looking", "for", "<br/>", "one", "of", "the", "special", "tags", "that", "tells", "it", "to", "start", "interpreting", "the", "text", "as", "RUBY", "code.", "The", "parser", "then", "executes", "all", "of", "the", "code", "it", "finds", "until", "it", "runs", "into", "a", "RUBY", "closing", "<br/>", "tag."] 
+
+-------------
+
+3. 
+
+> first_string_array.each do |v|
+>     puts v
+>   end
+RUBY
+parses
+a
+file
+by
+looking
+for
+<br/>
+one
+of
+the
+special
+tags
+that
+tells
+it
+to
+start
+interpreting
+the
+text
+as
+RUBY
+code.
+The
+parser
+then
+executes
+all
+of
+the
+code
+it
+finds
+until
+it
+runs
+into
+a
+RUBY
+closing
+<br/>
+tag.
+ => ["RUBY", "parses", "a", "file", "by", "looking", "for", "<br/>", "one", "of", "the", "special", "tags", "that", "tells", "it", "to", "start", "interpreting", "the", "text", "as", "RUBY", "code.", "The", "parser", "then", "executes", "all", "of", "the", "code", "it", "finds", "until", "it", "runs", "into", "a", "RUBY", "closing", "<br/>", "tag."] 
+1.9.3p194 :067 > 
+
+-------------
+
+4.
+
+> first_string.split.collect(&:capitalize).join(" ")
+ => "Ruby Parses A File By Looking For <br/> One Of The Special Tags That Tells It To Start Interpreting The Text As Ruby Code. The Parser Then Executes All Of The Code It Finds Until It Runs Into A Ruby Closing <br/> Tag.ruby Does Not Require (or Support) Explicit Type Definition In Variable Declaration; A Variable's Type Is Determined By The Context In Which The Variable Is Used. Ruby Does Not Require (or Support) Explicit Type Definition In Variable Declaration; A Variable's Type Is Determined By The Context In Which The Variable Is Used."
+
+
+
+-------------
+
+
+ 5. 
+
+ first_string.concat " " + second_string
+ => "RUBY parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as RUBY code. The parser then executes all of the code it finds until it runs into a RUBY closing <br/> tag.RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used. RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used." 
+
+
+-------------
+
+
+ 6.
+
+> puts <<FIRST_STRING
+> #{first_string}
+> FIRST_STRING
+RUBY parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as RUBY code. The parser then executes all of the code it finds until it runs into a RUBY closing <br/> tag.RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used. RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used.
+ => nil
+
+> puts <<SECOND_STRING
+> #{second_string}
+> SECOND_STRING
+RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used.
+ => nil 
+
+
+-------------
+
+
+7.
+
+ > Time.now.strftime('%d-%m-%Y')
+ => "13-09-2012"
+
+
+
+-------------
+
+
+8.
+
+> Date.strptime("12-01-2012", "%d-%m-%Y").strftime("%d %b %Y")
+ => "12 Jan 2012"
+
+-------------
+
+ 9.
+
+ > Time.now + (7*24*60*60)
+ => 2012-09-20 17:55:26 +0530
+
+-------------
+
+10.
+
+> first_string_length = first_string.length/4
+=> 135
+> first_string.scan(/.{#{first_string_length}}/)
+ => ["RUBY parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as RUBY code. The parser t", "hen executes all of the code it finds until it runs into a RUBY closing <br/> tag.RUBY does not require (or support) explicit type defi", "nition in variable declaration; a variable's type is determined by the context in which the variable is used. RUBY does not require (or", " support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is use"] 
+> first_string.scan(/.{#{first_string_length}}/).length
+ => 4 
+> puts first_string.scan(/.{#{first_string_length}}/).to_s
+["RUBY parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as RUBY code. The parser t", "hen executes all of the code it finds until it runs into a RUBY closing <br/> tag.RUBY does not require (or support) explicit type defi", "nition in variable declaration; a variable's type is determined by the context in which the variable is used. RUBY does not require (or", " support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is use"]
+ => nil
+
+
+-------------
+
+
+
+ 11. 
+
+
+ > first_string.split(".").reverse
+ => [" RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used", "RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used", " The parser then executes all of the code it finds until it runs into a RUBY closing <br/> tag", "RUBY parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as RUBY code"] 
+
+
+-------------
+
+
+12.
+
+> first_string.gsub("<br/>", "")
+ => "RUBY parses a file by looking for  one of the special tags that tells it to start interpreting the text as RUBY code. The parser then executes all of the code it finds until it runs into a RUBY closing  tag."
+
+-------------
+
+13.
+
+> puts first_string.scan('Ruby'.upcase)[0]
+RUBY
+ => nil
+
+-------------
+
+
+14. 
+
+> first_string.length
+ => 217
+ > second_string.length
+ => 162
+
+-------------
+
+
+15.
+
+> File.open('first_string_file.txt', 'w') { |file| file.write(first_string) }
+ => 217 
+
+-------------
+
+
+16.
+
+> Object.constants
+ => [:Object, :Module, :Class, :BasicObject, :Kernel, :NilClass, :NIL, :Data, :TrueClass, :TRUE, :FalseClass, :FALSE, :Encoding, :Comparable, :Enumerable, :String, :Symbol, :Exception, :SystemExit, :SignalException, :Interrupt, :StandardError, :TypeError, :ArgumentError, :IndexError, :KeyError, :RangeError, :ScriptError, :SyntaxError, :LoadError, :NotImplementedError, :NameError, :NoMethodError, :RuntimeError, :SecurityError, :NoMemoryError, :EncodingError, :SystemCallError, :Errno, :ZeroDivisionError, :FloatDomainError, :Numeric, :Integer, :Fixnum, :Float, :Bignum, :Array, :Hash, :ENV, :Struct, :RegexpError, :Regexp, :MatchData, :Marshal, :Range, :IOError, :EOFError, :IO, :STDIN, :STDOUT, :STDERR, :ARGF, :FileTest, :File, :Dir, :Time, :Random, :Signal, :Process, :Proc, :LocalJumpError, :SystemStackError, :Method, :UnboundMethod, :Binding, :Math, :GC, :ObjectSpace, :Enumerator, :StopIteration, :RubyVM, :Thread, :TOPLEVEL_BINDING, :ThreadGroup, :Mutex, :ThreadError, :Fiber, :FiberError, :Rational, :Complex, :RUBY_VERSION, :RUBY_RELEASE_DATE, :RUBY_PLATFORM, :RUBY_PATCHLEVEL, :RUBY_REVISION, :RUBY_DESCRIPTION, :RUBY_COPYRIGHT, :RUBY_ENGINE, :ARGV, :Gem, :RbConfig, :Config, :CROSS_COMPILING, :Exception2MessageMapper, :IRB, :RubyToken, :RubyLex, :Readline, :Date, :DateTime]
+
+
+-------------
+
+
+ 17.
+
+@Aditya told to not to solve.
+
+-------------
+
+
+
+ 18.
+
+@Aditya told to not to solve.
+
+ ------------
+
+
+19.
+
+> first_date = Date.parse("2010-04-12")
+ => #<Date: 2010-04-12 ((2455299j,0s,0n),+0s,2299161j)>
+ > second_date = Date.parse("12-05-2011")
+ => #<Date: 2011-05-12 ((2455694j,0s,0n),+0s,2299161j)> 
+ > second_date.mjd - first_date.mjd
+ => 395 
+
+
+-------------
+
+20.
+
+> today = Date.today
+ => #<Date: 2012-09-13 ((2456184j,0s,0n),+0s,2299161j)> 
+1.9.3p194 :232 > today.to_s
+ => "2012-09-13" 
+1.9.3p194 :233 > (today+20).to_s
+ => "2012-10-03"
+
+-------------
+
+21.
+
+> Date.today.to_s.split("-")
+ => ["2012", "09", "13"] 
+
+
+-------------
+ 
