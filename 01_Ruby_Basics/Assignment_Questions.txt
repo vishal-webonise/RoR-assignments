@@ -1,0 +1,29 @@
+Assignment - Sept 13, 2012
+==========================
+
+String 1 :
+RUBY parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as RUBY code. The parser then executes all of the code it finds until it runs into a RUBY closing <br/> tag.
+String 2 :
+RUBY does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used.
+
+1. Find occurance of RUBY from string 1.
+2. Find the position where RUBY occures in the string 1.
+3. Create array of words in string 1 & print them using a recursive function.
+4. Capitalise string 1
+5. Combine string 1 & 2.
+6. Print string 1 & 2 using heredoc.
+7. Print current date
+8. print 12th Jan 2012
+9. add 7 days in current date
+10. Cut the string 1 into 4 parts & print it.
+11. Divide the string 1 by occurances of '.'. Combine the array in reverse word sequence
+12. Remove the HTML characters from string.
+13. Print the 'RUBY' word from string 1 by traversing it using string functions
+14. Find the length of string 1 & 2
+15. Create file & write string 1 to that file using RUBY functions.
+16. Print all Global varibles provided by RUBY
+17. Usage and examples of Header (RUBY) 
+18. Redirect page 1 to page 2.
+19. Compare two dates. (12-4-2010 & 12-5-2011). Calculate the days between these two dates.
+20. Print date after 20 days from current date
+21. Print date in array format.
