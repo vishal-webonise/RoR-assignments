@@ -1,3 +1,22 @@
+=begin
+  # Assignment #02 - Sept 14, 2012
+  ---------------------------------
+  # To-Do - Scrape the `http://www.simplyrecipes.com/` website using Ruby
+  # @desc Pull all the necessary information about every recipe 
+          while crawling through each category of recipes.
+  # Progress log
+    --> COMPLETED
+    - Used Nokogiri parser to crawl pages
+    - Successfully tried finding required nodes and values of
+      those as well as values of attributes of some nodes
+    - Made use of iterators
+    - Has created a working script where all the required info
+      is saved to instance variables
+    --> HAVE TO DO
+    - Make use of MySQL to store the scraped info in proper way
+    - Try to use OOP, DRY (Practically never done before!)
+=end
+
 require 'rubygems'
 require 'open-uri'
 require 'nokogiri'
