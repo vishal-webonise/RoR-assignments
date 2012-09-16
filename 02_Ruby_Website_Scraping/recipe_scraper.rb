@@ -7,7 +7,7 @@
   # @desc Pull all the necessary information about every recipe 
           while crawling through each category of recipes.
   # Progress log
-    --> COMPLETED
+    --> FINISHED TASKS
     - Used Nokogiri parser to crawl pages
     - Successfully tried finding required nodes and values of
       those as well as values of attributes of some nodes
@@ -15,9 +15,9 @@
     - Has created a working script where all the required info
       is saved to respective variables
     - Made use of begin/rescue
-    --> HAVE TO DO
-    - Make use of MySQL to store the scraped info in proper way
-    - Try to use OOP, DRY (Practically never done before!) -- Not mandatory, though!
+    - Made use of MySQL database to store the scraped info in proper way
+    --> HAVE TO DO (Not mandatory, though!)
+    - Try to use OOP, DRY (Practically never done before!)
 =end
 
 # Required Gems
@@ -31,10 +31,14 @@ require 'mysql2'
 
 BASE_URL = "http://www.simplyrecipes.com"
 CATEGORY_INDEX_URL = "#{BASE_URL}/subject-index.php"
+DB_HOST = "localhost"
+DB_NAME = "scraped_recipes"
+DB_USERNAME = "root"
+DB_PASSWORD = "13048"
 
 # Database Connectivity
 
-#@client = Mysql2::Client.new(:host => "localhost", :username => "root", :password => root)
+client = Mysql2::Client.new(:host => DB_HOST, :username => DB_USERNAME, :password => DB_PASSWORD, :database => DB_NAME)
 
 ###################### Category Index Page
 index_doc = Nokogiri::HTML(open(CATEGORY_INDEX_URL))
@@ -48,6 +52,13 @@ index_doc.xpath('//p/a').each do |category|
   #   cat.attr("href").text if cat.attr("href").text.match("/tag/")
   # }.compact.uniq
   category_url = category["href"]
+
+  # Insert each category name and url into DB
+  # --> Escape before inserting
+  escaped_category_name = client.escape(category_name)
+  category_insert_result = client.query("INSERT INTO categories (name, url) VALUES('#{escaped_category_name}', '#{category_url}')")
+  # collect last insert id for category
+  category_last_insert_id = client.last_id
 
   unless category_url == ""
     puts "Fetching recipes for #{category_name}..."
@@ -77,6 +88,14 @@ index_doc.xpath('//p/a').each do |category|
           recipe_ingredients = recipe_ingredient_array.join("|").to_s
           # Save recipe method
           recipe_method = recipe_doc.xpath('//div[@id="recipe-method"]').text
+          # Insert recipe details into DB
+          # --> Escape before inserting
+          escaped_recipe_name = client.escape(recipe_name)
+          escaped_recipe_description = client.escape(recipe_desc)
+          escaped_recipe_ingredients = client.escape(recipe_ingredients)
+          escaped_recipe_method = client.escape(recipe_method)
+          puts "\t* Inserting recipe into DB..."
+          category_insert_result = client.query("INSERT INTO recipes (name, url, image_url, description, ingredients, method, category_id) VALUES('#{escaped_recipe_name}', '#{recipe_url}', '#{recipe_image_url}', '#{escaped_recipe_description}', '#{escaped_recipe_ingredients}', '#{escaped_recipe_method}', #{category_last_insert_id})")
         end # done: recipes.each
       ensure
         sleep 1.0 + rand
