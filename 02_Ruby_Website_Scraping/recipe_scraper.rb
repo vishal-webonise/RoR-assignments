@@ -34,7 +34,7 @@ CATEGORY_INDEX_URL = "#{BASE_URL}/subject-index.php"
 DB_HOST = "localhost"
 DB_NAME = "scraped_recipes"
 DB_USERNAME = "root"
-DB_PASSWORD = "13048"
+DB_PASSWORD = ""
 
 # Database Connectivity
 
